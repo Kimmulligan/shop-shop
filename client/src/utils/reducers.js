@@ -1,11 +1,18 @@
 import {
   UPDATE_PRODUCTS,
   UPDATE_CATEGORIES,
-  UPDATE_CURRENT_CATEGORY
+  UPDATE_CURRENT_CATEGORY,
+  ADD_TO_CART,
+  ADD_MULTIPLE_TO_CART,
+  REMOVE_FROM_CART,
+  UPDATE_CART_QUANTITY,
+  CLEAR_CART,
+  TOGGLE_CART
 } from "./actions"
 import { useReducer } from "react";
 
 //import useReducer React hook
+
 export const reducer = (state, action) => {
   switch (action.type) {
     //if action type value of 'UPDATE_PRODUCTS', return a new state object with an updated products array}
@@ -23,7 +30,28 @@ export const reducer = (state, action) => {
         return {
           ...state,
           currentCategory: action.currentCategory
-        }
+        };
+        case ADD_TO_CART:
+          return {
+            ...state,
+            cartOpen: true,
+            cart: [...state.cart, action.product]
+          };
+          case ADD_MULTIPLE_TO_CART:
+            return {
+              ...state,
+              cart: [...state.cart, ...action.products],
+            };
+          case REMOVE_FROM_CART:
+            let newState = state.cart.filter(product => {
+              return product._id !== action.id;
+            });
+
+            return {
+              ...state,
+              cartOpen: newState.length > 0,
+              cart: newState
+            };
 
       //if it's none of these actions, do not update state at all and keep things the same!
       default:
