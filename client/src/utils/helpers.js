@@ -61,5 +61,5 @@ export function idbPromise(storeName, method, object) {
       db.close();
     };
   };
-  )};
+});
 }
