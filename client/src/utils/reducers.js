@@ -1,3 +1,4 @@
+//import { createStore } from 'redux';
 import {
   UPDATE_PRODUCTS,
   UPDATE_CATEGORIES,
@@ -9,11 +10,19 @@ import {
   CLEAR_CART,
   TOGGLE_CART
 } from "./actions"
-import { useReducer } from "react";
-
+// import { useReducer } from "react";
+import { combineReducers } from "redux";
 //import useReducer React hook
 
-export const reducer = (state, action) => {
+const  initialState = {
+  products: [],
+  cart: [],
+  cartOpen: false,
+  categories: [],
+  currentCategory: ''
+};
+
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     //if action type value of 'UPDATE_PRODUCTS', return a new state object with an updated products array}
     case UPDATE_PRODUCTS:
@@ -84,6 +93,4 @@ export const reducer = (state, action) => {
     }
 };
 
-export function useProductReducer(initialState) {
-  return useReducer(reducer, initialState);
-}
+export default reducer;
