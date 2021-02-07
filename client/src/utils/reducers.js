@@ -11,7 +11,7 @@ import {
   TOGGLE_CART
 } from "./actions"
 // import { useReducer } from "react";
-import { combineReducers } from "redux";
+// import { combineReducers } from "redux";
 //import useReducer React hook
 
 const  initialState = {
